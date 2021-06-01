@@ -34,11 +34,34 @@ for ix in dirs:
     img_data = os.listdir(path)
     count=count+1
     for im in img_data:
-        img = image.load_img(os.path.join(path,im),target_size=(224,224))      
+        img = image.load_img(os.path.join(path,im),target_size=(224,224))
+        img1 = img.rotate(90)
+        img2 = img.rotate(180)
+        img3 = img.rotate(270)
+        img4 = ImageOps.mirror(img)
+        img5 = img4.rotate(90)
+        img6 = img4.rotate(180)
+        img7 = img4.rotate(270)
+              
         img_array = image.img_to_array(ImageOps.grayscale(img))
+        img_array1 = image.img_to_array(ImageOps.grayscale(img1))
+        img_array2 = image.img_to_array(ImageOps.grayscale(img2))
+        img_array3 = image.img_to_array(ImageOps.grayscale(img3))
+        img_array4 = image.img_to_array(ImageOps.grayscale(img4))
+        img_array5 = image.img_to_array(ImageOps.grayscale(img5))
+        img_array6 = image.img_to_array(ImageOps.grayscale(img6))
+        img_array7 = image.img_to_array(ImageOps.grayscale(img7))
         image_data.append(img_array)
-        labels.append(label_dict[ix])
-        co+=1
+        image_data.append(img_array1)
+        image_data.append(img_array2)
+        image_data.append(img_array3)
+        image_data.append(img_array4)
+        image_data.append(img_array5)
+        image_data.append(img_array6)
+        image_data.append(img_array7)
+        for i in range(8):
+            labels.append(label_dict[ix])
+            co+=1
         print(count,co)
 
 X_train = np.asarray(image_data)
